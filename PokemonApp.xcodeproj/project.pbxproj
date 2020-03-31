@@ -14,6 +14,7 @@
 		66FDE4DC2433FB57009FE064 /* PATabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FDE4DB2433FB57009FE064 /* PATabBarController.swift */; };
 		66FDE4DF2433FBED009FE064 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FDE4DE2433FBED009FE064 /* SearchVC.swift */; };
 		66FDE4E12433FBFF009FE064 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FDE4E02433FBFF009FE064 /* FavoritesVC.swift */; };
+		66FDE4E7243400C6009FE064 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FDE4E6243400C6009FE064 /* UIView+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		66FDE4DB2433FB57009FE064 /* PATabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PATabBarController.swift; sourceTree = "<group>"; };
 		66FDE4DE2433FBED009FE064 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		66FDE4E02433FBFF009FE064 /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
+		66FDE4E6243400C6009FE064 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 		66FDE4B52433F8E5009FE064 /* PokemonApp */ = {
 			isa = PBXGroup;
 			children = (
+				66FDE4E224340063009FE064 /* Extentions */,
 				66FDE4D92433FB19009FE064 /* Custom Views */,
 				66FDE4DD2433FBC9009FE064 /* Screens */,
 				66FDE4D82433FAA7009FE064 /* Support */,
@@ -129,6 +132,14 @@
 				66FDE4E02433FBFF009FE064 /* FavoritesVC.swift */,
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		66FDE4E224340063009FE064 /* Extentions */ = {
+			isa = PBXGroup;
+			children = (
+				66FDE4E6243400C6009FE064 /* UIView+Ext.swift */,
+			);
+			path = Extentions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +244,7 @@
 				66FDE4E12433FBFF009FE064 /* FavoritesVC.swift in Sources */,
 				66FDE4DF2433FBED009FE064 /* SearchVC.swift in Sources */,
 				66FDE4B72433F8E5009FE064 /* AppDelegate.swift in Sources */,
+				66FDE4E7243400C6009FE064 /* UIView+Ext.swift in Sources */,
 				66FDE4B92433F8E5009FE064 /* SceneDelegate.swift in Sources */,
 				66FDE4DC2433FB57009FE064 /* PATabBarController.swift in Sources */,
 			);
