@@ -91,6 +91,7 @@ class SearchVC: UIViewController {
             switch result {
             case .success(let types):
                 self.pokemonTypes = types
+                self.selectedType = types[0].name
                 DispatchQueue.main.async {
                     self.pickerView.reloadComponent(.zero)
                 }
@@ -102,8 +103,7 @@ class SearchVC: UIViewController {
     }
     
     @objc func pushPokemonListVC() {
-        let pokemonsListVC = PokemonsListVC()
-        pokemonsListVC.pokemonType = selectedType
+        let pokemonsListVC = PokemonsListVC(pokemonType: selectedType)
         navigationController?.pushViewController(pokemonsListVC, animated: true)
     }
     
@@ -111,7 +111,7 @@ class SearchVC: UIViewController {
 
 extension SearchVC: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedType = pokemonTypes[row].name.capitalizingFirstLetter()
+        selectedType = pokemonTypes[row].name
     }
 }
 
@@ -127,7 +127,7 @@ extension SearchVC: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pokemonTypes[row].name
+        return pokemonTypes[row].name.capitalizingFirstLetter()
     }
     
 }

@@ -26,6 +26,40 @@ class NetworkManager {
                 return
             }
             
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completed(.failure(.invalidResponse))
+                return
+            }
+            
+            guard let data = data else {
+                completed(.failure(.invalidData))
+                return
+            }
+            
+            do {
+                let result = try JSONDecoder().decode(ResultModel.self, from: data)
+                completed(.success(result.results))
+            } catch {
+                completed(.failure(.invalidData))
+            }
+        }
+        
+        task.resume()
+    }
+    
+    func getPokemonByType(type: String, completed: @escaping(Result<[PokemonResults], GFError>) -> Void) {
+        
+        let endPoint = ApiURLs.pokemonApi + "type/\(type)"
+        guard let url = URL(string: endPoint) else {
+            completed(.failure(.invalidURL))
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error)  in
+            if let _ = error {
+                completed(.failure(.unableToComplete))
+                return
+            }
             
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
                 completed(.failure(.invalidResponse))
@@ -38,10 +72,8 @@ class NetworkManager {
             }
             
             do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let result = try decoder.decode(ResultModel.self, from: data)
-                completed(.success(result.results))
+                let type = try JSONDecoder().decode(TypesResults.self, from: data)
+                completed(.success(type.pokemon))
             } catch {
                 completed(.failure(.invalidData))
             }
@@ -49,4 +81,5 @@ class NetworkManager {
         
         task.resume()
     }
+    
 }
