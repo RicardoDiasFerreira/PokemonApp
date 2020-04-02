@@ -14,7 +14,7 @@ class PATabBarController: UITabBarController {
         super.viewDidLoad()
         
         UITabBar.appearance().tintColor = .systemRed
-        viewControllers = [createSearchNC(), createFavoritesNC()]
+        viewControllers = [createSearchNC(), createGenerationNC(), createFavoritesNC()]
 
     }
     
@@ -24,9 +24,15 @@ class PATabBarController: UITabBarController {
         return UINavigationController(rootViewController: searchVC)
     }
     
+    private func createGenerationNC() -> UINavigationController {
+        let favoritesVC = GenerationNC()
+        favoritesVC.tabBarItem = UITabBarItem(title: "Generation", image: SFSymbols.generation, tag: 1)
+        return UINavigationController(rootViewController: favoritesVC)
+    }
+    
     private func createFavoritesNC() -> UINavigationController {
         let favoritesVC = FavoritesVC(title: "Favorites")
-        favoritesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
+        favoritesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 2)
         return UINavigationController(rootViewController: favoritesVC)
     }
 }

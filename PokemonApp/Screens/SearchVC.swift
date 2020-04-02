@@ -11,18 +11,24 @@ import UIKit
 class SearchVC: UIViewController {
     
     let logoImageView = UIImageView()
-    let pokemonTypeTextField = PATextField()
+    let pickerView = UIPickerView()
     let searchButton = PAButton(backgroundColor: .systemRed, title: "GO!!!")
+    
+    var pokemonTypes:[PokemonType] = []
+    var selectedType:String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
-        view.addSubviews(logoImageView, pokemonTypeTextField, searchButton)
+        view.addSubviews(logoImageView, pickerView, searchButton)
         
         configureImageView()
-        configureTextField()
+        configurePickerView()
         configureSearchButton()
+        
+        getPokemonTypes()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,20 +57,23 @@ class SearchVC: UIViewController {
         ])
     }
     
-    private func configureTextField() {
-        //        usernameTextField.delegate = self
+    private func configurePickerView() {
         let padding:CGFloat = 50
+        pickerView.delegate = self
+        pickerView.layer.borderColor = UIColor.red.cgColor
+        pickerView.layer.cornerRadius = 16
+        pickerView.layer.borderWidth = 1
+        pickerView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            pokemonTypeTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: padding),
-            pokemonTypeTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            pokemonTypeTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            pokemonTypeTextField.heightAnchor.constraint(equalToConstant: padding)
+            pickerView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: padding),
+            pickerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            pickerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            pickerView.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
     
     private func configureSearchButton() {
-        //        searchButton -> add on click event
         searchButton.addTarget(self, action: #selector(pushPokemonListVC), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
@@ -75,8 +84,50 @@ class SearchVC: UIViewController {
         ])
     }
     
+    private func getPokemonTypes() {
+        NetworkManager.shared.getPokemonTypes {[weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let types):
+                self.pokemonTypes = types
+                DispatchQueue.main.async {
+                    self.pickerView.reloadComponent(.zero)
+                }
+            case.failure(let error):
+                print("fodeu-> \(error.rawValue)")
+            }
+        }
+        
+    }
+    
     @objc func pushPokemonListVC() {
-        print("oupaaaaaa")
+        let pokemonsListVC = PokemonsListVC()
+        pokemonsListVC.pokemonType = selectedType
+        navigationController?.pushViewController(pokemonsListVC, animated: true)
+    }
+    
+}
+
+extension SearchVC: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedType = pokemonTypes[row].name.capitalizingFirstLetter()
+    }
+}
+
+extension SearchVC: UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        pickerView.subviews.forEach({ $0.isHidden = $0.frame.height < 1.0 })
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pokemonTypes.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pokemonTypes[row].name
     }
     
 }
