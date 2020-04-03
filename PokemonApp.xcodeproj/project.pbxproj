@@ -9,7 +9,9 @@
 /* Begin PBXBuildFile section */
 		663F64E3243693F20006EB4E /* TypeResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663F64E2243693F20006EB4E /* TypeResults.swift */; };
 		663F64E5243698EF0006EB4E /* PokemonResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663F64E4243698EF0006EB4E /* PokemonResults.swift */; };
+		663F64E82436A3880006EB4E /* PokemonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663F64E72436A3880006EB4E /* PokemonCell.swift */; };
 		6658ABDD2435315800D53F37 /* PokemonsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6658ABDC2435315800D53F37 /* PokemonsListVC.swift */; };
+		66649C6A2436A43600DA844A /* PAAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66649C692436A43600DA844A /* PAAvatarImageView.swift */; };
 		668D615A243562AE007AA95B /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668D6159243562AE007AA95B /* String+Ext.swift */; };
 		66C1F81824354D0700B9E7CB /* GenerationNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C1F81724354D0700B9E7CB /* GenerationNC.swift */; };
 		66C1F81B2435529300B9E7CB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C1F81A2435529300B9E7CB /* NetworkManager.swift */; };
@@ -42,7 +44,9 @@
 /* Begin PBXFileReference section */
 		663F64E2243693F20006EB4E /* TypeResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeResults.swift; sourceTree = "<group>"; };
 		663F64E4243698EF0006EB4E /* PokemonResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonResults.swift; sourceTree = "<group>"; };
+		663F64E72436A3880006EB4E /* PokemonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonCell.swift; sourceTree = "<group>"; };
 		6658ABDC2435315800D53F37 /* PokemonsListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonsListVC.swift; sourceTree = "<group>"; };
+		66649C692436A43600DA844A /* PAAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAAvatarImageView.swift; sourceTree = "<group>"; };
 		668D6159243562AE007AA95B /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		66C1F81724354D0700B9E7CB /* GenerationNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationNC.swift; sourceTree = "<group>"; };
 		66C1F81A2435529300B9E7CB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -84,11 +88,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		663F64E62436A35D0006EB4E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				663F64E72436A3880006EB4E /* PokemonCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		6658ABDB243530FE00D53F37 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		66649C682436A40B00DA844A /* ImagesView */ = {
+			isa = PBXGroup;
+			children = (
+				66649C692436A43600DA844A /* PAAvatarImageView.swift */,
+			);
+			path = ImagesView;
 			sourceTree = "<group>";
 		};
 		66C1F8192435528300B9E7CB /* Manager */ = {
@@ -165,6 +185,8 @@
 		66FDE4D92433FB19009FE064 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				66649C682436A40B00DA844A /* ImagesView */,
+				663F64E62436A35D0006EB4E /* Cells */,
 				6658ABDB243530FE00D53F37 /* ViewControllers */,
 				66FDE4EE243407BE009FE064 /* Buttons */,
 				66FDE4EB24340608009FE064 /* TextField */,
@@ -336,10 +358,12 @@
 				66FDE4DF2433FBED009FE064 /* SearchVC.swift in Sources */,
 				66FDE4B72433F8E5009FE064 /* AppDelegate.swift in Sources */,
 				663F64E5243698EF0006EB4E /* PokemonResults.swift in Sources */,
+				663F64E82436A3880006EB4E /* PokemonCell.swift in Sources */,
 				66FDE4E7243400C6009FE064 /* UIView+Ext.swift in Sources */,
 				66FDE4B92433F8E5009FE064 /* SceneDelegate.swift in Sources */,
 				66FDE4ED24340619009FE064 /* PATextField.swift in Sources */,
 				66C1F81824354D0700B9E7CB /* GenerationNC.swift in Sources */,
+				66649C6A2436A43600DA844A /* PAAvatarImageView.swift in Sources */,
 				66FDE4DC2433FB57009FE064 /* PATabBarController.swift in Sources */,
 				668D615A243562AE007AA95B /* String+Ext.swift in Sources */,
 				66FDE4F0243407C9009FE064 /* PAButton.swift in Sources */,

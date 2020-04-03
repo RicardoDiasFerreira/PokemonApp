@@ -16,4 +16,9 @@ extension String {
     mutating func capitalizeFirstLetter() {
         self = self.capitalizingFirstLetter()
     }
+    
+    func getLastPathComponent() -> String {
+        let last = self.components(separatedBy: "/")
+        return last[6]
+    }
 }

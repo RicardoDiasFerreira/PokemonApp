@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct PokemonType: Codable {
+struct PokemonType: Codable, Hashable {
     let name: String
     let url: String
+    let id: String?
 }

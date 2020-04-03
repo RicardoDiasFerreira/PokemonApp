@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct PokemonResults: Codable {
+struct PokemonResults: Codable, Hashable {
     let pokemon:PokemonType
 }

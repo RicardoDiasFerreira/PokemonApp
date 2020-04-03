@@ -6,7 +6,7 @@
 //  Copyright © 2020 Ricardo Ferreira. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class NetworkManager {
     
@@ -77,6 +77,28 @@ class NetworkManager {
             } catch {
                 completed(.failure(.invalidData))
             }
+        }
+        
+        task.resume()
+    }
+    
+    func downloadImage(pokemonID: String, completed: @escaping(UIImage?) -> Void) {
+        let endPoint = ApiURLs.pokemonImages + "\(pokemonID).png"
+        guard let url = URL(string: endPoint) else {
+            completed(nil)
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard error == nil,
+                let response = response as? HTTPURLResponse, response.statusCode == 200,
+                let data = data,
+                let image = UIImage(data: data) else {
+                    completed(nil)
+                    return
+                }
+                        
+            completed(image)
         }
         
         task.resume()

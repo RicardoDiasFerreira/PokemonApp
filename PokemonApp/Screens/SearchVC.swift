@@ -19,7 +19,7 @@ class SearchVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         view.backgroundColor = .systemBackground
         view.addSubviews(logoImageView, pickerView, searchButton)
         
