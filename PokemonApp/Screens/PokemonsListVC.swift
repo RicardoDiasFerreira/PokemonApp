@@ -91,7 +91,7 @@ class PokemonsListVC: UIViewController {
         //UICollectionViewFlowLayout concrete layout object that organizes items into a grid with optional header and footer views for each section.
         let flowLayout                  = UICollectionViewFlowLayout()
         flowLayout.sectionInset         = UIEdgeInsets.init(top: padding, left: padding, bottom: padding, right: padding)
-        flowLayout.itemSize             = CGSize.init(width: itemWidth, height: itemWidth + 40)
+        flowLayout.itemSize             = CGSize.init(width: itemWidth, height: itemWidth)
         
         return flowLayout
     }

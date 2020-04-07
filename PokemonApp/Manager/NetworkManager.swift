@@ -11,7 +11,8 @@ import UIKit
 class NetworkManager {
     
     static let shared = NetworkManager()
-    
+    private let cache = NSCache<NSString, UIImage>()
+
     func getPokemonTypes(completed: @escaping(Result<[PokemonType], GFError>) -> Void) {
         
         let endPoint = ApiURLs.pokemonApi + "type"
@@ -84,6 +85,12 @@ class NetworkManager {
     
     func downloadImage(pokemonID: String, completed: @escaping(UIImage?) -> Void) {
         let endPoint = ApiURLs.pokemonImages + "\(pokemonID).png"
+        
+        if let cachedImage = cache.object(forKey: pokemonID as NSString) {
+            completed(cachedImage)
+            return
+        }
+                
         guard let url = URL(string: endPoint) else {
             completed(nil)
             return
@@ -98,6 +105,7 @@ class NetworkManager {
                     return
                 }
                         
+            self.cache.setObject(image, forKey: pokemonID as NSString)
             completed(image)
         }
         

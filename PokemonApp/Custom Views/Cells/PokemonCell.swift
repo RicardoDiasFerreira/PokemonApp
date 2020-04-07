@@ -11,9 +11,10 @@ import UIKit
 class PokemonCell: UICollectionViewCell {
     
     static let reuseID = "PokemonCell"
-    let pokemonAvatarImage = PAAvatarImageView(frame: .zero)
     let pokemonName = UILabel()
-    
+    let pokemonNumber = UILabel()
+    let pokemonAvatarImage = PAAvatarImageView(frame: .zero)
+   
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
@@ -25,30 +26,41 @@ class PokemonCell: UICollectionViewCell {
     }
     
     func set(pokemon: PokemonType) {
-        pokemonAvatarImage.downloadImage(pokemonID: pokemon.url.getLastPathComponent())
+        let pokemonID = pokemon.url.getLastPathComponent()
+        
+        pokemonAvatarImage.downloadImage(pokemonID: pokemonID)
         pokemonName.text = pokemon.name.capitalizingFirstLetter()
+        pokemonNumber.text = "#" + pokemonID
         backgroundColor = .systemGreen
-        layer.cornerRadius = 20
-        layer.borderWidth = 2
-        layer.borderColor = UIColor.systemGray4.cgColor
     }
     
     private func configure() {
-        addSubviews(pokemonAvatarImage, pokemonName)
+        layer.cornerRadius = 20
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.systemGray4.cgColor
+        addSubviews(pokemonAvatarImage, pokemonName, pokemonNumber)
         pokemonName.translatesAutoresizingMaskIntoConstraints = false
+        pokemonNumber.translatesAutoresizingMaskIntoConstraints = false
+        pokemonNumber.textAlignment = .right
         
-        let padding: CGFloat = 8
+        let padding: CGFloat = 10
         
         NSLayoutConstraint.activate([
-            pokemonAvatarImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
-            pokemonAvatarImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            pokemonAvatarImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
-            pokemonAvatarImage.heightAnchor.constraint(equalTo: pokemonAvatarImage.widthAnchor),
-            
-            pokemonName.topAnchor.constraint(equalTo: pokemonAvatarImage.bottomAnchor, constant: 12),
+            pokemonName.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
             pokemonName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            pokemonName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
-            pokemonName.heightAnchor.constraint(equalToConstant: 20)
+            pokemonName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -50),
+            pokemonName.heightAnchor.constraint(equalToConstant: 20),
+            
+            pokemonNumber.centerYAnchor.constraint(equalTo: pokemonName.centerYAnchor),
+            pokemonNumber.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            pokemonNumber.leadingAnchor.constraint(equalTo: pokemonName.trailingAnchor, constant: -padding),
+            pokemonNumber.heightAnchor.constraint(equalToConstant: 20),
+
+            
+            pokemonAvatarImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding),
+            pokemonAvatarImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            pokemonAvatarImage.widthAnchor.constraint(equalToConstant: 90),
+            pokemonAvatarImage.heightAnchor.constraint(equalToConstant: 90)
 
         ])
         

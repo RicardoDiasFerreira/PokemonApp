@@ -11,6 +11,7 @@ import UIKit
 enum Images {
     
     static let logoImage = UIImage(named: "pokemon-topo")
+    static let pokemonEmpty = UIImage(named: "pokemon-empty")
 }
 
 enum SFSymbols {
@@ -20,4 +21,9 @@ enum SFSymbols {
 enum ApiURLs {
     static let pokemonApi = "https://pokeapi.co/api/v2/"
     static let pokemonImages = "https://pokeres.bastionbot.org/images/pokemon/"
+}
+
+enum PokemonTypeColor {
+    
+    case normal
 }

@@ -11,7 +11,7 @@ import UIKit
 class SearchVC: UIViewController {
     
     let logoImageView = UIImageView()
-    let pickerView = UIPickerView()
+    let pickerView = PAPickerView()
     let searchButton = PAButton(backgroundColor: .systemRed, title: "GO!!!")
     
     var pokemonTypes:[PokemonType] = []
@@ -60,10 +60,6 @@ class SearchVC: UIViewController {
     private func configurePickerView() {
         let padding:CGFloat = 50
         pickerView.delegate = self
-        pickerView.layer.borderColor = UIColor.red.cgColor
-        pickerView.layer.cornerRadius = 16
-        pickerView.layer.borderWidth = 1
-        pickerView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             pickerView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: padding),
