@@ -71,6 +71,7 @@ class PokemonsListVC: UIViewController {
         dataSource = UICollectionViewDiffableDataSource<Section, PokemonResults>(collectionView: pokemonCollectionView, cellProvider: { (pokemonCollectionView, indexPath, pokemonType) -> UICollectionViewCell? in
             let cell = pokemonCollectionView.dequeueReusableCell(withReuseIdentifier: PokemonCell.reuseID, for: indexPath) as! PokemonCell
             cell.set(pokemon: pokemonType.pokemon)
+            cell.setBackgroundColorByPokemonType(type: self.pokemonType)
             return cell
         })
     }

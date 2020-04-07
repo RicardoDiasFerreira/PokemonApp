@@ -99,14 +99,14 @@ class SearchVC: UIViewController {
     }
     
     @objc func pushPokemonListVC() {
-//        let pokemonsListVC = PokemonsListVC(pokemonType: selectedType)
-//        navigationController?.pushViewController(pokemonsListVC, animated: true)
-        DispatchQueue.main.async {
-            let cenas = PAAlertVC(title: "Empty Username", message: "Please enter an username!", buttonTitle: "Ok")
-            cenas.modalPresentationStyle = .overFullScreen
-            cenas.modalTransitionStyle = .crossDissolve
-            self.present(cenas, animated: true)
-        }
+        let pokemonsListVC = PokemonsListVC(pokemonType: selectedType)
+        navigationController?.pushViewController(pokemonsListVC, animated: true)
+//        DispatchQueue.main.async {
+//            let cenas = PAAlertVC(title: "Empty Username", message: "Please enter an username!", buttonTitle: "Ok")
+//            cenas.modalPresentationStyle = .overFullScreen
+//            cenas.modalTransitionStyle = .crossDissolve
+//            self.present(cenas, animated: true)
+//        }
     }
     
 }

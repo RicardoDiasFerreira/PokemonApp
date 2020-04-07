@@ -31,7 +31,6 @@ class PokemonCell: UICollectionViewCell {
         pokemonAvatarImage.downloadImage(pokemonID: pokemonID)
         pokemonName.text = pokemon.name.capitalizingFirstLetter()
         pokemonNumber.text = "#" + pokemonID
-        backgroundColor = .systemGreen
     }
     
     private func configure() {
