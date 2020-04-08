@@ -12,7 +12,7 @@ class SearchVC: UIViewController {
     
     let logoImageView = UIImageView()
     let pickerView = PAPickerView()
-    let searchButton = PAButton(backgroundColor: .systemRed, title: "GO!!!")
+    let searchButton = PAButton()
     
     var pokemonTypes:[PokemonType] = []
     var selectedType:String!
@@ -70,6 +70,7 @@ class SearchVC: UIViewController {
     }
     
     private func configureSearchButton() {
+        searchButton.set(backgroundColor: .systemRed, title: "GO!!")
         searchButton.addTarget(self, action: #selector(pushPokemonListVC), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
@@ -99,14 +100,9 @@ class SearchVC: UIViewController {
     }
     
     @objc func pushPokemonListVC() {
-        let pokemonsListVC = PokemonsListVC(pokemonType: selectedType)
-        navigationController?.pushViewController(pokemonsListVC, animated: true)
-//        DispatchQueue.main.async {
-//            let cenas = PAAlertVC(title: "Empty Username", message: "Please enter an username!", buttonTitle: "Ok")
-//            cenas.modalPresentationStyle = .overFullScreen
-//            cenas.modalTransitionStyle = .crossDissolve
-//            self.present(cenas, animated: true)
-//        }
+        presentAlertVCOnMainTread(title: "empt", message: "message cenas", btnText: "ok");
+//        let pokemonsListVC = PokemonsListVC(pokemonType: selectedType)
+//        navigationController?.pushViewController(pokemonsListVC, animated: true)
     }
     
 }

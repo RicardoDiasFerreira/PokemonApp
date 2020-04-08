@@ -12,8 +12,8 @@ class PAAlertVC: UIViewController {
     
     let containerView = PAAlertContainerView()
     let titleLabel =  PATitleLabel(textAligment: .center, fontSize: 20)
-    let messageLabel = PATitleLabel(textAligment: .left, fontSize: 18)
-    let actionButton = UIButton()
+    let messageLabel = PABodyLabel(textAligment: .center)
+    let actionButton = PAButton()
     
     var alertTitle:String?
     var alertMessage:String?
@@ -24,6 +24,8 @@ class PAAlertVC: UIViewController {
         alertTitle = title
         alertMessage = message
         alertButtonTitle = buttonTitle
+        
+        configureVCModalType()
     }
     
     required init?(coder: NSCoder) {
@@ -41,6 +43,11 @@ class PAAlertVC: UIViewController {
         configureMessageLabel()
         configureActionButton()
 
+    }
+    
+    private func configureVCModalType() {
+        modalPresentationStyle = .overFullScreen
+        modalTransitionStyle = .crossDissolve
     }
     
     private func configureContainerView() {
@@ -67,7 +74,7 @@ class PAAlertVC: UIViewController {
         messageLabel.numberOfLines = 4
         
         NSLayoutConstraint.activate([
-            messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+            messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
             messageLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
             messageLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
             messageLabel.bottomAnchor.constraint(equalTo: actionButton.topAnchor, constant: -10)
@@ -77,8 +84,6 @@ class PAAlertVC: UIViewController {
     private func configureActionButton() {
         actionButton.setTitle(alertButtonTitle ?? "Ok", for: .normal)
         actionButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
-        actionButton.translatesAutoresizingMaskIntoConstraints = false
-        actionButton.backgroundColor = .systemRed
         
         NSLayoutConstraint.activate([
             actionButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10),

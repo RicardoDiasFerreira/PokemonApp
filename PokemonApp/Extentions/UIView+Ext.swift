@@ -10,7 +10,6 @@ import UIKit
 
 extension UIView {
     
-    //Variadic paramaters-> function that receives n parameters, and you can use it as an array
     func addSubviews(_ views:UIView...) {
         views.forEach(addSubview)
         //        for view in views { addSubview(view) }
@@ -35,7 +34,7 @@ extension UIView {
             backgroundColor = .systemBlue
         case "steel":
             backgroundColor = .systemGray
-        case "eletric":
+        case "electric":
             backgroundColor = .systemYellow
         case "bug":
             backgroundColor = UIColor.green.withAlphaComponent(0.5)
