@@ -12,7 +12,7 @@ class SearchVC: UIViewController {
     
     let logoImageView = UIImageView()
     let pickerView = PAPickerView()
-    let searchButton = PAButton()
+    let searchButton = PAButton(backgroundColor: .systemRed)
     
     var pokemonTypes:[PokemonType] = []
     var selectedType:String!
@@ -100,9 +100,9 @@ class SearchVC: UIViewController {
     }
     
     @objc func pushPokemonListVC() {
-        presentAlertVCOnMainTread(title: "empt", message: "message cenas", btnText: "ok");
-//        let pokemonsListVC = PokemonsListVC(pokemonType: selectedType)
-//        navigationController?.pushViewController(pokemonsListVC, animated: true)
+//        presentAlertVCOnMainTread(title: "empt", message: "message cenas", btnText: "ok");
+        let pokemonsListVC = PokemonsListVC(pokemonType: selectedType)
+        navigationController?.pushViewController(pokemonsListVC, animated: true)
     }
     
 }

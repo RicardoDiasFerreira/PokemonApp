@@ -11,8 +11,8 @@ import UIKit
 class PokemonCell: UICollectionViewCell {
     
     static let reuseID = "PokemonCell"
-    let pokemonName = UILabel()
-    let pokemonNumber = UILabel()
+    let pokemonName = PATitleLabel(textAligment: .left, fontSize: 16)
+    let pokemonNumber = PATitleLabel(textAligment: .right, fontSize: 16)
     let pokemonAvatarImage = PAAvatarImageView(frame: .zero)
    
     override init(frame: CGRect) {
@@ -38,9 +38,6 @@ class PokemonCell: UICollectionViewCell {
         layer.borderWidth = 1
         layer.borderColor = UIColor.systemGray4.cgColor
         addSubviews(pokemonAvatarImage, pokemonName, pokemonNumber)
-        pokemonName.translatesAutoresizingMaskIntoConstraints = false
-        pokemonNumber.translatesAutoresizingMaskIntoConstraints = false
-        pokemonNumber.textAlignment = .right
         
         let padding: CGFloat = 10
         

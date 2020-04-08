@@ -13,7 +13,7 @@ class PAAlertVC: UIViewController {
     let containerView = PAAlertContainerView()
     let titleLabel =  PATitleLabel(textAligment: .center, fontSize: 20)
     let messageLabel = PABodyLabel(textAligment: .center)
-    let actionButton = PAButton()
+    let actionButton = PAButton(backgroundColor: .systemPink)
     
     var alertTitle:String?
     var alertMessage:String?
@@ -83,8 +83,7 @@ class PAAlertVC: UIViewController {
     
     private func configureActionButton() {
         actionButton.setTitle(alertButtonTitle ?? "Ok", for: .normal)
-        actionButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
-        
+        actionButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)        
         NSLayoutConstraint.activate([
             actionButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10),
             actionButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
