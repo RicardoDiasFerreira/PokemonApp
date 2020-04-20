@@ -25,7 +25,7 @@ class PATabBarController: UITabBarController {
     }
     
     private func createGenerationNC() -> UINavigationController {
-        let favoritesVC = GenerationNC()
+        let favoritesVC = GenerationVC()
         favoritesVC.tabBarItem = UITabBarItem(title: "Generation", image: SFSymbols.generation, tag: 1)
         return UINavigationController(rootViewController: favoritesVC)
     }

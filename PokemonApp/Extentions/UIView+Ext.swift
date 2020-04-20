@@ -43,6 +43,20 @@ extension UIView {
         default:
             backgroundColor = .white
         }
+    }
+    
+    func createTwoColumnFlowLayout() -> UICollectionViewLayout {
+        let width                       = self.bounds.width
+        let padding: CGFloat            = 12
+        let minimumItemSpacing: CGFloat = 10
+        let availableWidth              = width - (padding * 2) - (minimumItemSpacing * 2)
+        let itemWidth                   = availableWidth / 2
         
+        //UICollectionViewFlowLayout concrete layout object that organizes items into a grid with optional header and footer views for each section.
+        let flowLayout                  = UICollectionViewFlowLayout()
+        flowLayout.sectionInset         = UIEdgeInsets.init(top: padding, left: padding, bottom: padding, right: padding)
+        flowLayout.itemSize             = CGSize.init(width: itemWidth, height: itemWidth)
+        
+        return flowLayout
     }
 }

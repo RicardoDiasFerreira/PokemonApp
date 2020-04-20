@@ -13,10 +13,9 @@ class NetworkManager {
     static let shared = NetworkManager()
     private let cache = NSCache<NSString, UIImage>()
 
-    func getPokemonTypes(completed: @escaping(Result<[PokemonType], GFError>) -> Void) {
+    func getPokemonTypes(completed: @escaping(Result<[PokemonType], PAError>) -> Void) {
         
-        let endPoint = ApiURLs.pokemonApi + "type"
-        guard let url = URL(string: endPoint) else {
+        guard let url = URL(string: API.pokemonType) else {
             completed(.failure(.invalidURL))
             return
         }
@@ -48,9 +47,9 @@ class NetworkManager {
         task.resume()
     }
     
-    func getPokemonByType(type: String, completed: @escaping(Result<[PokemonResults], GFError>) -> Void) {
+    func getPokemonByType(type: String, completed: @escaping(Result<[PokemonResults], PAError>) -> Void) {
         
-        let endPoint = ApiURLs.pokemonApi + "type/\(type)"
+        let endPoint = API.pokemonType + type
         guard let url = URL(string: endPoint) else {
             completed(.failure(.invalidURL))
             return
@@ -84,7 +83,7 @@ class NetworkManager {
     }
     
     func downloadImage(pokemonID: String, completed: @escaping(UIImage?) -> Void) {
-        let endPoint = ApiURLs.pokemonImages + "\(pokemonID).png"
+        let endPoint = API.pokemonImages + "\(pokemonID).png"
         
         if let cachedImage = cache.object(forKey: pokemonID as NSString) {
             completed(cachedImage)
@@ -110,6 +109,41 @@ class NetworkManager {
         }
         
         task.resume()
+    }
+    
+    func getPokemonGenerations(completed: @escaping(Result<[GenModel],PAError>) -> Void) {
+        
+        guard let url = URL(string: API.pokemonGens) else {
+            completed(.failure(.invalidURL))
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error)  in
+            if let _ = error {
+                completed(.failure(.unableToComplete))
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completed(.failure(.invalidResponse))
+                return
+            }
+            
+            guard let data = data else {
+                completed(.failure(.invalidData))
+                return
+            }
+            
+            do {
+                let gens = try JSONDecoder().decode(GenResult.self, from: data)
+                completed(.success(gens.results))
+            } catch {
+                completed(.failure(.invalidData))
+            }
+        }
+        
+        task.resume()
+        
     }
     
 }

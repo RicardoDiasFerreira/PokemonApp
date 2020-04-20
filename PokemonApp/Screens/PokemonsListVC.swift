@@ -10,10 +10,8 @@ import UIKit
 
 class PokemonsListVC: UIViewController {
     
-    //only one section, for more sections add Section
-    enum Section { case main }
-    var pokemonCollectionView: UICollectionView!
-    var dataSource: UICollectionViewDiffableDataSource<Section, PokemonResults>!
+    var pokemonsCV: UICollectionView!
+    var dataSource: UICollectionViewDiffableDataSource<CVSection, PokemonResults>!
     
     var pokemonType:String!
     var pokemons:[PokemonResults] = []
@@ -45,10 +43,10 @@ class PokemonsListVC: UIViewController {
     }
     
     private func configureCollectionView() {
-        pokemonCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createTwoColumnFlowLayout(in: view))
-        view.addSubview(pokemonCollectionView)
-        pokemonCollectionView.backgroundColor = .systemBackground
-        pokemonCollectionView.register(PokemonCell.self, forCellWithReuseIdentifier: PokemonCell.reuseID)
+        pokemonsCV = UICollectionView(frame: view.bounds, collectionViewLayout: view.createTwoColumnFlowLayout())
+        view.addSubview(pokemonsCV)
+        pokemonsCV.backgroundColor = .systemBackground
+        pokemonsCV.register(PokemonCell.self, forCellWithReuseIdentifier: PokemonCell.reuseID)
         
     }
     
@@ -60,15 +58,15 @@ class PokemonsListVC: UIViewController {
             case .success(let pokemons):
                 self.pokemons = pokemons
                 self.updateData(on: self.pokemons)
-
+                
             case.failure(let error):
-                print("error-> \(error.rawValue)")
+                self.presentAlertVCOnMainTread(title: "Error", message: error.rawValue, btnText: "Ok")
             }
         })
     }
     
     func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, PokemonResults>(collectionView: pokemonCollectionView, cellProvider: { (pokemonCollectionView, indexPath, pokemonType) -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<CVSection, PokemonResults>(collectionView: pokemonsCV, cellProvider: { (pokemonCollectionView, indexPath, pokemonType) -> UICollectionViewCell? in
             let cell = pokemonCollectionView.dequeueReusableCell(withReuseIdentifier: PokemonCell.reuseID, for: indexPath) as! PokemonCell
             cell.set(pokemon: pokemonType.pokemon)
             cell.setBackgroundColorByPokemonType(type: self.pokemonType)
@@ -77,24 +75,10 @@ class PokemonsListVC: UIViewController {
     }
     
     func updateData(on pokemon: [PokemonResults]) {
-         var snapshot = NSDiffableDataSourceSnapshot<Section, PokemonResults>()
-         snapshot.appendSections([.main])
-         snapshot.appendItems(pokemon)
-         DispatchQueue.main.async { self.dataSource.apply(snapshot, animatingDifferences: true) }
-     }
-    private func createTwoColumnFlowLayout(in view: UIView) -> UICollectionViewLayout {
-        let width                       = view.bounds.width
-        let padding: CGFloat            = 12
-        let minimumItemSpacing: CGFloat = 10
-        let availableWidth              = width - (padding * 2) - (minimumItemSpacing * 2)
-        let itemWidth                   = availableWidth / 2
-        
-        //UICollectionViewFlowLayout concrete layout object that organizes items into a grid with optional header and footer views for each section.
-        let flowLayout                  = UICollectionViewFlowLayout()
-        flowLayout.sectionInset         = UIEdgeInsets.init(top: padding, left: padding, bottom: padding, right: padding)
-        flowLayout.itemSize             = CGSize.init(width: itemWidth, height: itemWidth)
-        
-        return flowLayout
+        var snapshot = NSDiffableDataSourceSnapshot<CVSection, PokemonResults>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(pokemon)
+        DispatchQueue.main.async { self.dataSource.apply(snapshot, animatingDifferences: true) }
     }
-        
+    
 }

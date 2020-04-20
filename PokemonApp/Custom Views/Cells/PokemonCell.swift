@@ -11,8 +11,8 @@ import UIKit
 class PokemonCell: UICollectionViewCell {
     
     static let reuseID = "PokemonCell"
-    let pokemonName = PATitleLabel(textAligment: .left, fontSize: 16)
-    let pokemonNumber = PATitleLabel(textAligment: .right, fontSize: 16)
+    let pokemonName = PATitleLabel(textAlignment: .left, fontSize: 16)
+    let pokemonNumber = PATitleLabel(textAlignment: .right, fontSize: 16)
     let pokemonAvatarImage = PAAvatarImageView(frame: .zero)
    
     override init(frame: CGRect) {
@@ -52,7 +52,6 @@ class PokemonCell: UICollectionViewCell {
             pokemonNumber.leadingAnchor.constraint(equalTo: pokemonName.trailingAnchor, constant: -padding),
             pokemonNumber.heightAnchor.constraint(equalToConstant: 20),
 
-            
             pokemonAvatarImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding),
             pokemonAvatarImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
             pokemonAvatarImage.widthAnchor.constraint(equalToConstant: 90),

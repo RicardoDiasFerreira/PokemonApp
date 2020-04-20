@@ -11,7 +11,7 @@ import UIKit
 class PAAlertVC: UIViewController {
     
     let containerView = PAAlertContainerView()
-    let titleLabel =  PATitleLabel(textAligment: .center, fontSize: 20)
+    let titleLabel =  PATitleLabel(textAlignment: .center, fontSize: 20)
     let messageLabel = PABodyLabel(textAligment: .center)
     let actionButton = PAButton(backgroundColor: .systemPink)
     

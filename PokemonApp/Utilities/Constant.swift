@@ -14,13 +14,22 @@ enum Images {
     static let pokemonEmpty = UIImage(named: "pokemon-empty")
 }
 
+enum CVSection {
+    case main
+}
+
 enum SFSymbols {
     static let generation = UIImage(systemName: "wand.and.stars")
 }
 
-enum ApiURLs {
-    static let pokemonApi = "https://pokeapi.co/api/v2/"
+enum API {
+    private static let pokemonApi = "https://pokeapi.co/api/v2/"
+    
+    static let pokemonType = "\(pokemonApi)type/"
+    static let pokemonGens = "\(pokemonApi)generation/"
+    
     static let pokemonImages = "https://pokeres.bastionbot.org/images/pokemon/"
+
 }
 
 enum PokemonTypeColor {

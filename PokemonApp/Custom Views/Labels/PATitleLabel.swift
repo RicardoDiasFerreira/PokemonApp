@@ -15,10 +15,10 @@ class PATitleLabel: UILabel {
         configure()
     }
     
-    convenience init(textAligment: NSTextAlignment, fontSize: CGFloat) {
+    convenience init(textAlignment: NSTextAlignment, fontSize: CGFloat) {
         self.init(frame: .zero)
-        textAlignment = textAligment
-        font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
+        self.textAlignment = textAlignment
+        self.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
     }
     
     required init?(coder: NSCoder) {

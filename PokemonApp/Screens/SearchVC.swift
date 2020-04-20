@@ -93,14 +93,13 @@ class SearchVC: UIViewController {
                     self.pickerView.reloadComponent(.zero)
                 }
             case.failure(let error):
-                print("fodeu-> \(error.rawValue)")
+                self.presentAlertVCOnMainTread(title:"Error!", message: error.rawValue, btnText: "Ok")
             }
         }
         
     }
     
     @objc func pushPokemonListVC() {
-//        presentAlertVCOnMainTread(title: "empt", message: "message cenas", btnText: "ok");
         let pokemonsListVC = PokemonsListVC(pokemonType: selectedType)
         navigationController?.pushViewController(pokemonsListVC, animated: true)
     }
