@@ -52,7 +52,7 @@ class GenerationVC: UIViewController {
     private func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<CVSection, GenModel>(collectionView: generationsCV, cellProvider: { (generationsCV, indexPath, generation) -> UICollectionViewCell? in
             let cell = generationsCV.dequeueReusableCell(withReuseIdentifier: GenerationCell.reuseID, for: indexPath) as! GenerationCell
-            cell.set(name: generation.name.capitalizingFirstLetter())
+            cell.set(name: generation.name)
             return cell
         })
     }
@@ -68,7 +68,16 @@ class GenerationVC: UIViewController {
 
 extension GenerationVC: UICollectionViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("tou ca!! \(generations[indexPath.row].name)" )
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {        
+        NetworkManager.shared.getPokemonByGeneration(generationUrl: generations[indexPath.row].url, completed: {result in
+            
+            switch result {
+            case .success(let rr):
+                print(rr)
+            case .failure(let err):
+                print(err)
+            }
+            
+        })
     }
 }

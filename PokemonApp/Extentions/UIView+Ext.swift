@@ -47,8 +47,8 @@ extension UIView {
     
     func createTwoColumnFlowLayout() -> UICollectionViewLayout {
         let width                       = self.bounds.width
-        let padding: CGFloat            = 12
-        let minimumItemSpacing: CGFloat = 10
+        let padding: CGFloat            = 10
+        let minimumItemSpacing: CGFloat = 5
         let availableWidth              = width - (padding * 2) - (minimumItemSpacing * 2)
         let itemWidth                   = availableWidth / 2
         

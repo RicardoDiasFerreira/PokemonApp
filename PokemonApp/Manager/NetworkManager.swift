@@ -111,7 +111,7 @@ class NetworkManager {
         task.resume()
     }
     
-    func getPokemonGenerations(completed: @escaping(Result<[GenModel],PAError>) -> Void) {
+    func getPokemonGenerations(completed: @escaping(Result<[GenModel], PAError>) -> Void) {
         
         guard let url = URL(string: API.pokemonGens) else {
             completed(.failure(.invalidURL))
@@ -143,7 +143,42 @@ class NetworkManager {
         }
         
         task.resume()
+    }
+    
+    func getPokemonByGeneration(generationUrl: String, completed: @escaping(Result<[PokemonType], PAError>) -> Void) {
+                
+        guard let url = URL(string: generationUrl) else {
+            completed(.failure(.invalidURL))
+            return
+        }
         
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error)  in
+            if let _ = error {
+                completed(.failure(.unableToComplete))
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completed(.failure(.invalidResponse))
+                return
+            }
+            
+            guard let data = data else {
+                completed(.failure(.invalidData))
+                return
+            }
+            
+            do {
+                let decode = JSONDecoder()
+                decode.keyDecodingStrategy = .convertFromSnakeCase
+                let gen = try decode.decode(Gen.self, from: data)
+                completed(.success(gen.pokemonSpecies.reversed()))
+            } catch {
+                completed(.failure(.invalidData))
+            }
+        }
+        
+        task.resume()
     }
     
 }
