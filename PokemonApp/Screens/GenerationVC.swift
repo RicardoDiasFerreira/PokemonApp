@@ -20,6 +20,8 @@ class GenerationVC: UIViewController {
         
         title = "Generations"
         
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
         configureCollectionView()
         getPokemonGenerations()
         configureDataSource()
@@ -68,16 +70,10 @@ class GenerationVC: UIViewController {
 
 extension GenerationVC: UICollectionViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {        
-        NetworkManager.shared.getPokemonByGeneration(generationUrl: generations[indexPath.row].url, completed: {result in
-            
-            switch result {
-            case .success(let rr):
-                print(rr)
-            case .failure(let err):
-                print(err)
-            }
-            
-        })
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let pokemonsListVC = PokemonsListVC(with: "Gen")
+        navigationController?.pushViewController(pokemonsListVC, animated: true)
+        
     }
 }

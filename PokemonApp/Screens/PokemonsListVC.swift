@@ -38,6 +38,13 @@ class PokemonsListVC: UIViewController {
         self.pokemonType = pokemonType
     }
     
+    init(with title: String) {
+        super.init(nibName: nil, bundle: nil)
+        self.title = title
+        self.pokemonType = "normal"
+
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
