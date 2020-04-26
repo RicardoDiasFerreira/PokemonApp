@@ -15,7 +15,7 @@ class PokemonCell: CollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
-        self.setCellConstraint()
+        setCellConstraint()
     }
     
     required init?(coder: NSCoder) {

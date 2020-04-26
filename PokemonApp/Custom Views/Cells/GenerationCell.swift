@@ -15,6 +15,8 @@ class GenerationCell: CollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
+        setCellConstraint()
+        
     }
     
     required init?(coder: NSCoder) {
