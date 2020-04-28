@@ -27,6 +27,7 @@ enum API {
     
     static let pokemonType = "\(pokemonApi)type/"
     static let pokemonGens = "\(pokemonApi)generation/"
+    static let pokemonInfo = "\(pokemonApi)pokemon/"
     
     static let pokemonImages = "https://pokeres.bastionbot.org/images/pokemon/"
 

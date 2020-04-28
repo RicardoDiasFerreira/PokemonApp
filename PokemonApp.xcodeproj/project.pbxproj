@@ -21,6 +21,9 @@
 		6658ABDD2435315800D53F37 /* PokemonsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6658ABDC2435315800D53F37 /* PokemonsListVC.swift */; };
 		66649C6A2436A43600DA844A /* PAAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66649C692436A43600DA844A /* PAAvatarImageView.swift */; };
 		668D615A243562AE007AA95B /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668D6159243562AE007AA95B /* String+Ext.swift */; };
+		668ED1CF2458606000131CF7 /* Stat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668ED1CE2458606000131CF7 /* Stat.swift */; };
+		668ED1D12458618400131CF7 /* StatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668ED1D02458618400131CF7 /* StatModel.swift */; };
+		668ED1D6245862BA00131CF7 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668ED1D5245862BA00131CF7 /* Pokemon.swift */; };
 		669CE76924394F4D001D6C40 /* PAPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669CE76824394F4D001D6C40 /* PAPickerView.swift */; };
 		669CE76C243D3672001D6C40 /* PAAlertContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669CE76B243D3672001D6C40 /* PAAlertContainerView.swift */; };
 		66C1F81824354D0700B9E7CB /* GenerationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C1F81724354D0700B9E7CB /* GenerationVC.swift */; };
@@ -67,6 +70,9 @@
 		6658ABDC2435315800D53F37 /* PokemonsListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonsListVC.swift; sourceTree = "<group>"; };
 		66649C692436A43600DA844A /* PAAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAAvatarImageView.swift; sourceTree = "<group>"; };
 		668D6159243562AE007AA95B /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		668ED1CE2458606000131CF7 /* Stat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stat.swift; sourceTree = "<group>"; };
+		668ED1D02458618400131CF7 /* StatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatModel.swift; sourceTree = "<group>"; };
+		668ED1D5245862BA00131CF7 /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		669CE76824394F4D001D6C40 /* PAPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAPickerView.swift; sourceTree = "<group>"; };
 		669CE76B243D3672001D6C40 /* PAAlertContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAAlertContainerView.swift; sourceTree = "<group>"; };
 		66C1F81724354D0700B9E7CB /* GenerationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationVC.swift; sourceTree = "<group>"; };
@@ -145,6 +151,24 @@
 			path = ImagesView;
 			sourceTree = "<group>";
 		};
+		668ED1CD2458603F00131CF7 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				668ED1D02458618400131CF7 /* StatModel.swift */,
+				668ED1CE2458606000131CF7 /* Stat.swift */,
+			);
+			path = Stats;
+			sourceTree = "<group>";
+		};
+		668ED1D4245862AA00131CF7 /* Pokemon */ = {
+			isa = PBXGroup;
+			children = (
+				668ED1D5245862BA00131CF7 /* Pokemon.swift */,
+				668ED1CD2458603F00131CF7 /* Stats */,
+			);
+			path = Pokemon;
+			sourceTree = "<group>";
+		};
 		669CE76724394F0A001D6C40 /* PickerView */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +196,7 @@
 		66C1F81E2435586300B9E7CB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				668ED1D4245862AA00131CF7 /* Pokemon */,
 				66C1F81F2435587B00B9E7CB /* Result.swift */,
 				663F64E2243693F20006EB4E /* TypeResults.swift */,
 				663F64E4243698EF0006EB4E /* PokemonResults.swift */,
@@ -404,7 +429,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				668ED1D6245862BA00131CF7 /* Pokemon.swift in Sources */,
 				66363163244E27D900F8A9B4 /* GenModel.swift in Sources */,
+				668ED1D12458618400131CF7 /* StatModel.swift in Sources */,
+				668ED1CF2458606000131CF7 /* Stat.swift in Sources */,
 				6635D45A243D38920004B376 /* PATitleLabel.swift in Sources */,
 				66C1F81B2435529300B9E7CB /* NetworkManager.swift in Sources */,
 				66FDE4EA24340391009FE064 /* Constant.swift in Sources */,
