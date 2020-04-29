@@ -181,8 +181,8 @@ class NetworkManager {
         task.resume()
     }
     
-    func getPokemonInfo(id: String, completed: @escaping(Result<Pokemon, PAError>) -> Void) {
-        let endPoint =  API.pokemonInfo + id
+    func getPokemonInfo(name: String, completed: @escaping(Result<Pokemon, PAError>) -> Void) {
+        let endPoint =  API.pokemonInfo + name
         
         guard let url = URL(string:endPoint) else {
             completed(.failure(.invalidURL))

@@ -94,27 +94,9 @@ class PokemonsListVC: UIViewController {
 extension PokemonsListVC: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let pokemon = pokemons[indexPath.row]
-        let id = pokemon.pokemon.url.getLastPathComponent()
-        
-        NetworkManager.shared.getPokemonInfo(id: id, completed: { [weak self] result in
-            switch result {
-            case .success(let pokemon):
-                print(pokemon)
-                DispatchQueue.main.async {
-                    let destVC = PokemonInfoVC()
-                    let navController = UINavigationController(rootViewController: destVC)
-                    self?.present(navController, animated: true)
-                }
-
-                
-            case .failure(let error):
-                print("error \(error)")
-            }
-            
-            
-        })
-        
+        let name = pokemons[indexPath.row].pokemon.name
+        let navController = UINavigationController(rootViewController: PokemonInfoVC(name: name))
+        present(navController, animated: true)
     }
 }
 
