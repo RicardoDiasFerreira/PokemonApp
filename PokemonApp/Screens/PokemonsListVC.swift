@@ -53,6 +53,7 @@ class PokemonsListVC: UIViewController {
         pokemonsCV = UICollectionView(frame: view.bounds, collectionViewLayout: view.createTwoColumnFlowLayout())
         view.addSubview(pokemonsCV)
         pokemonsCV.backgroundColor = .systemBackground
+        pokemonsCV.delegate = self
         pokemonsCV.register(PokemonCell.self, forCellWithReuseIdentifier: PokemonCell.reuseID)
         
     }
@@ -89,3 +90,31 @@ class PokemonsListVC: UIViewController {
     }
     
 }
+
+extension PokemonsListVC: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let pokemon = pokemons[indexPath.row]
+        let id = pokemon.pokemon.url.getLastPathComponent()
+        
+        NetworkManager.shared.getPokemonInfo(id: id, completed: { [weak self] result in
+            switch result {
+            case .success(let pokemon):
+                print(pokemon)
+                DispatchQueue.main.async {
+                    let destVC = PokemonInfoVC()
+                    let navController = UINavigationController(rootViewController: destVC)
+                    self?.present(navController, animated: true)
+                }
+
+                
+            case .failure(let error):
+                print("error \(error)")
+            }
+            
+            
+        })
+        
+    }
+}
+

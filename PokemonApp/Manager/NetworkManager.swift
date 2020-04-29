@@ -48,8 +48,8 @@ class NetworkManager {
     }
     
     func getPokemonByType(type: String, completed: @escaping(Result<[PokemonResults], PAError>) -> Void) {
-        
         let endPoint = API.pokemonType + type
+        
         guard let url = URL(string: endPoint) else {
             completed(.failure(.invalidURL))
             return
@@ -180,5 +180,44 @@ class NetworkManager {
         
         task.resume()
     }
+    
+    func getPokemonInfo(id: String, completed: @escaping(Result<Pokemon, PAError>) -> Void) {
+        let endPoint =  API.pokemonInfo + id
+        
+        guard let url = URL(string:endPoint) else {
+            completed(.failure(.invalidURL))
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error)  in
+            if let _ = error {
+                completed(.failure(.unableToComplete))
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completed(.failure(.invalidResponse))
+                return
+            }
+            
+            guard let data = data else {
+                completed(.failure(.invalidData))
+                return
+            }
+            
+            do {
+                let decode = JSONDecoder()
+                decode.keyDecodingStrategy = .convertFromSnakeCase
+                let poke = try decode.decode(Pokemon.self, from: data)
+                completed(.success(poke))
+            } catch {
+                completed(.failure(.invalidData))
+            }
+        }
+        
+        task.resume()
+        
+    }
+
     
 }
