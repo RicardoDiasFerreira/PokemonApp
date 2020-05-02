@@ -27,7 +27,21 @@ class FavoriteCell: UITableViewCell {
     private func configure() {
         addSubviews(pokemonImageView, pokemonNameLabel)
         
+        accessoryType = .disclosureIndicator
+        let padding:CGFloat = 10
+        
+        NSLayoutConstraint.activate([
+            pokemonImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            pokemonImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: padding),
+            pokemonImageView.widthAnchor.constraint(equalToConstant: 60),
+            pokemonImageView.heightAnchor.constraint(equalToConstant: 60),
+            
+            pokemonNameLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            pokemonNameLabel.leadingAnchor.constraint(equalTo: pokemonImageView.trailingAnchor, constant: 2 * padding),
+            pokemonNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding),
+            pokemonNameLabel.heightAnchor.constraint(equalToConstant: 40)
+        ])
+
     }
-    
     
 }

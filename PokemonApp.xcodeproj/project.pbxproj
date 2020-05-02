@@ -31,6 +31,7 @@
 		669CE76924394F4D001D6C40 /* PAPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669CE76824394F4D001D6C40 /* PAPickerView.swift */; };
 		669CE76C243D3672001D6C40 /* PAAlertContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669CE76B243D3672001D6C40 /* PAAlertContainerView.swift */; };
 		66C03773245E3C3F005F83FA /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C03772245E3C3F005F83FA /* FavoriteCell.swift */; };
+		66C03775245E3F35005F83FA /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C03774245E3F35005F83FA /* PersistenceManager.swift */; };
 		66C1F81824354D0700B9E7CB /* GenerationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C1F81724354D0700B9E7CB /* GenerationVC.swift */; };
 		66C1F81B2435529300B9E7CB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C1F81A2435529300B9E7CB /* NetworkManager.swift */; };
 		66C1F81D243553A900B9E7CB /* PAError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C1F81C243553A900B9E7CB /* PAError.swift */; };
@@ -85,6 +86,7 @@
 		669CE76824394F4D001D6C40 /* PAPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAPickerView.swift; sourceTree = "<group>"; };
 		669CE76B243D3672001D6C40 /* PAAlertContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAAlertContainerView.swift; sourceTree = "<group>"; };
 		66C03772245E3C3F005F83FA /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
+		66C03774245E3F35005F83FA /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		66C1F81724354D0700B9E7CB /* GenerationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationVC.swift; sourceTree = "<group>"; };
 		66C1F81A2435529300B9E7CB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		66C1F81C243553A900B9E7CB /* PAError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAError.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				66C1F81A2435529300B9E7CB /* NetworkManager.swift */,
+				66C03774245E3F35005F83FA /* PersistenceManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 				668ED1CF2458606000131CF7 /* Stat.swift in Sources */,
 				6635D45A243D38920004B376 /* PATitleLabel.swift in Sources */,
 				66C1F81B2435529300B9E7CB /* NetworkManager.swift in Sources */,
+				66C03775245E3F35005F83FA /* PersistenceManager.swift in Sources */,
 				66FDE4EA24340391009FE064 /* Constant.swift in Sources */,
 				663F64E3243693F20006EB4E /* TypeResults.swift in Sources */,
 				6658ABDD2435315800D53F37 /* PokemonsListVC.swift in Sources */,
