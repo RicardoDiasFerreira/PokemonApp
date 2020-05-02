@@ -19,7 +19,7 @@ class PokemonInfoVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBackground
+        configureViewController()
         configureViews()
         getPokemonInformation()
         
@@ -34,14 +34,23 @@ class PokemonInfoVC: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func configureViewController() {
+        view.backgroundColor = .systemBackground
+        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
+        navigationItem.rightBarButtonItem = doneBtn
+    }
+    
     private func configureViews() {
+        
         
         let views = [infoView, statsView, evolutionView]
         
         for view in views {
             self.view.addSubview(view)
             view.translatesAutoresizingMaskIntoConstraints = false
-            view.backgroundColor = .systemRed
+            view.backgroundColor = .systemGray6
+            view.layer.borderWidth = 0.2
+            view.layer.cornerRadius = 10
             NSLayoutConstraint.activate([
                 view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10),
                 view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10)
@@ -50,13 +59,13 @@ class PokemonInfoVC: UIViewController {
         
         NSLayoutConstraint.activate([
             infoView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 15),
-            infoView.heightAnchor.constraint(equalToConstant: 250),
+            infoView.heightAnchor.constraint(equalToConstant: 130),
             
             statsView.topAnchor.constraint(equalTo: self.infoView.bottomAnchor, constant: 15),
-            statsView.heightAnchor.constraint(equalToConstant: 180),
+            statsView.heightAnchor.constraint(equalToConstant: 115),
             
             evolutionView.topAnchor.constraint(equalTo: self.statsView.bottomAnchor, constant: 15),
-            evolutionView.heightAnchor.constraint(equalToConstant: 100),
+            evolutionView.heightAnchor.constraint(equalToConstant: 130),
         ])
     }
     
@@ -77,7 +86,9 @@ class PokemonInfoVC: UIViewController {
     }
     
     private func configureUIElements(with pokemon: Pokemon) {
-        self.add(childVC: PokemonMainInfoVC(with: pokemon), to: infoView)
+        add(childVC: PokemonMainInfoVC(with: pokemon), to: infoView)
+        add(childVC: PokemonStatsVC(with: pokemon), to: statsView)
+        add(childVC: PokemonEvolutionVC(with: pokemon), to: evolutionView)
     }
     
     private func add(childVC: UIViewController, to containerView: UIView) {
@@ -85,5 +96,9 @@ class PokemonInfoVC: UIViewController {
         containerView.addSubview(childVC.view)
         childVC.view.frame = containerView.bounds
         childVC.didMove(toParent: self)
+    }
+    
+    @objc func dismissVC() {
+        dismiss(animated: true)
     }
 }
