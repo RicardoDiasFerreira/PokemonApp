@@ -30,11 +30,22 @@ class PokemonCell: CollectionViewCell {
     func set(pokemon: PokemonType) {
         let pokemonID = pokemon.url.getLastPathComponent()
         self.pokemon = pokemon
-        self.pokemon.id = pokemonID
         cellImage.downloadImage(pokemonID: pokemonID)
         cellName.text = pokemon.name.capitalizingFirstLetter()
         pokemonNumber.text = "#" + pokemonID
-        favorite.image = PersistenceManager.isFavorited(id: pokemonID) ? SFSymbols.favorite : SFSymbols.noFavorite
+        PersistenceManager.retrieveFavorites{ [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let favorites):
+                guard !favorites.contains(pokemon) else {
+                    self.favorite.image = SFSymbols.favorite
+                    break
+                }
+                self.favorite.image = SFSymbols.noFavorite
+            case .failure(_):
+                self.favorite.image = SFSymbols.noFavorite
+            }
+        }
     }
     
     private func configureFavoriteImage() {
@@ -74,6 +85,14 @@ class PokemonCell: CollectionViewCell {
     }
     
     @objc func updateFavoriteImage() {
-        favorite.image = PersistenceManager.updateWith(pokemon: pokemon) ? SFSymbols.favorite : SFSymbols.noFavorite
+        
+        PersistenceManager.updateWith(favorite: pokemon) { [weak self] error in
+            guard let self = self else { return }
+            guard error != nil else {
+                self.favorite.image = SFSymbols.favorite
+                return
+            }
+            self.favorite.image = SFSymbols.noFavorite
+        }
     }
 }

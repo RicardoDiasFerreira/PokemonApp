@@ -35,6 +35,7 @@ class FavoriteCell: UITableViewCell {
         addSubviews(pokemonImageView, pokemonNameLabel)
         
         accessoryType = .detailButton
+        tintColor = .systemRed
         let padding:CGFloat = 10
         
         NSLayoutConstraint.activate([

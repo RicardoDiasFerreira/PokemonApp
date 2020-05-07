@@ -60,7 +60,7 @@ class FavoritesVC: UIViewController {
 
             switch result {
             case .success(let favorites):
-                self.pokemons.append(favorites)
+                self.pokemons.append(contentsOf: favorites)
                 self.updateUI(with: self.pokemons)
                 break
 
@@ -109,15 +109,15 @@ extension FavoritesVC: UITableViewDelegate, UITableViewDataSource {
             return
         }
         
-//        PersistenceManager.updateWith(favorite: favorites[indexPath.row], actionType:.remove) { [weak self] error in
-//            guard let self = self else { return }
-//            guard let error = error else {
-//                self.favorites.remove(at: indexPath.row);
-//                tableView.deleteRows(at: [indexPath], with: .left)
-//                return
-//            }
-//            self.presentGFAlertOnMainThread(title: "Unable to remove", message: error.rawValue, buttonTitle: "Ok")
-//        }
+        PersistenceManager.updateWith(favorite: pokemons[indexPath.row]) { [weak self] error in
+            guard let self = self else { return }
+            guard let error = error else {
+                self.pokemons.remove(at: indexPath.row);
+                tableView.deleteRows(at: [indexPath], with: .left)
+                return
+            }
+            self.presentAlertVCOnMainTread(title: "Unable to remove", message: error.rawValue, btnText: "Ok")
+        }
     }
     
 }
