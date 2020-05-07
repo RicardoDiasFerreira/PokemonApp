@@ -12,7 +12,8 @@ class FavoriteCell: UITableViewCell {
     
     static let reuseID = "FavoriteCell"
     let pokemonImageView = PAAvatarImageView(frame: .zero)
-    let pokemonNameLabel   = PATitleLabel(textAlignment: .left, fontSize: 26)
+    let pokemonNameLabel = PATitleLabel(textAlignment: .left, fontSize: 26)
+    let pokemonNumberLabel = PATitleLabel(textAlignment: .left, fontSize: 26)
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -24,10 +25,16 @@ class FavoriteCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func set(pokemon: PokemonType) {
+        let pokemonID = pokemon.url.getLastPathComponent()
+        pokemonImageView.downloadImage(pokemonID: pokemonID)
+        pokemonNameLabel.text = pokemon.name.capitalizingFirstLetter()
+    }
+    
     private func configure() {
         addSubviews(pokemonImageView, pokemonNameLabel)
         
-        accessoryType = .disclosureIndicator
+        accessoryType = .detailButton
         let padding:CGFloat = 10
         
         NSLayoutConstraint.activate([
@@ -40,6 +47,8 @@ class FavoriteCell: UITableViewCell {
             pokemonNameLabel.leadingAnchor.constraint(equalTo: pokemonImageView.trailingAnchor, constant: 2 * padding),
             pokemonNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding),
             pokemonNameLabel.heightAnchor.constraint(equalToConstant: 40)
+            
+            
         ])
 
     }

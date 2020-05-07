@@ -19,10 +19,15 @@ enum CVSection {
 }
 
 enum SFSymbols {
+    
     static let generation = UIImage(systemName: "wand.and.stars")
+    static let favorite = UIImage(systemName: "heart.fill")
+    static let noFavorite = UIImage(systemName: "heart")
+
 }
 
 enum API {
+    
     private static let pokemonApi = "https://pokeapi.co/api/v2/"
     
     static let pokemonType = "\(pokemonApi)type/"

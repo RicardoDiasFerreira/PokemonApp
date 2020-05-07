@@ -11,7 +11,7 @@ import UIKit
 class FavoritesVC: UIViewController {
     
     let tableView = UITableView()
-    var pokemons:[Pokemon] = []
+    var pokemons:[PokemonType] = []
     
     init(title: String) {
         super.init(nibName: nil, bundle: nil)
@@ -30,6 +30,7 @@ class FavoritesVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        pokemons.removeAll()
         getFavorites()
     }
     
@@ -54,18 +55,31 @@ class FavoritesVC: UIViewController {
     }
     
     func getFavorites() {
-//        PersistenceManager.retrieveFavorites { [weak self] result in
-//            guard let self = self else { return }
-//
-//            switch result {
-//            case .success(let favorites):
-//                self.updateUI(with: favorites)
-//
-//            case .failure(let error):
-//                self.presentGFAlertOnMainThread(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
-//                break
-//            }
-//        }
+        PersistenceManager.retrieveFavorites { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case .success(let favorites):
+                self.pokemons.append(favorites)
+                self.updateUI(with: self.pokemons)
+                break
+
+            case .failure(let error):
+                self.presentAlertVCOnMainTread(title: "Something went wrong", message: error.rawValue, btnText: "Ok")
+                break
+            }
+        }
+    }
+    
+    private func updateUI(with favorites: [PokemonType]) {
+        if favorites.isEmpty {
+            self.tableView.tableFooterView = UIView()
+        } else {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.view.bringSubviewToFront(self.tableView)
+            }
+        }
     }
     
 }
@@ -77,7 +91,7 @@ extension FavoritesVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteCell.reuseID) as! FavoriteCell
-//        cell.set(favorite: pokemons[indexPath.row])
+        cell.set(pokemon: pokemons[indexPath.row])
         return cell
     }
     
@@ -85,7 +99,9 @@ extension FavoritesVC: UITableViewDelegate, UITableViewDataSource {
         let favorite = pokemons[indexPath.row]
         let destVC = PokemonInfoVC(name: favorite.name)
         
-        navigationController?.pushViewController(destVC, animated: true)
+        let navController = UINavigationController(rootViewController: destVC)
+        present(navController, animated: true)
+        
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

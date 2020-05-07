@@ -25,7 +25,7 @@ class GenerationVC: UIViewController {
         configureCollectionView()
         getPokemonGenerations()
         configureDataSource()
-        
+
     }
     
     private func configureCollectionView() {
